@@ -1,0 +1,103 @@
+.ng-valid[required],
+.ng-valid.required {
+    border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+}
+.hang{
+    overflow: hidden;
+    margin-top: 20px;
+}
+.hang div{
+    float: left;
+}
+.warn {
+    overflow: hidden;
+    width: 100%;
+    height: 31px;
+    position: relative;
+}
+.warn-block {
+    position: absolute;
+    top: 0;
+    float: left;
+    height: 31px;
+    line-height: 31px;
+    text-align: center;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.warn-block:nth-child(1) {
+    left: 7.5%;
+}
+.warn-block:nth-child(2) {
+    left: 37.5%;
+}
+.warn-block:nth-child(3) {
+    left: 67.5%;
+}
+.inp, .inp-dis {
+    width: 75%;
+    font-size: 14px;
+    height: 31px;
+    line-height: 20px;
+    padding: 4px;
+    box-sizing: border-box;
+    border: solid 1px #ddd;
+    display: inline-block;
+}
+.inp:hover {
+    border: solid 1px #3bb4f2;
+}
+.must-ipt:hover {
+    border-left: 5px solid #3bb4f2;
+}
+.inp-dis {
+    background: #eee;
+}
+.inp-note {
+    height: 80px;
+}
+.sdiv {
+    width: 75%;
+}
+.sdiv .inp, .sdiv .inp-dis {
+    width: 100%;
+}
+.mark {
+    float: left;
+    width: 25%;
+    height: 31px;
+    line-height: 31px;
+    text-align: right;
+}
+.mark-18 {
+    width: 18%;
+}
+.inp-82 {
+    width: 82%;
+}
+.pct-7-5 {
+    width: 7.5%;
+}
+.pct-22-5 {
+    width: 22.5%;
+}
+.pct-30 {
+    width: 30%;
+}
+.pct-32 {
+    width: 32%;
+}
+.pct-70 {
+    width: 70%;
+}
+.pct-92-5 {
+    width: 92.5%;
+}
+.pct-ml-5 {
+    left: 5%;
+}

@@ -1,0 +1,46 @@
+<nav class="breadcrumb">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABWElEQVQoFWP8+vUrAymAiRTFILU4Nbx9/harWVg1PF9WER0aFhpXt/E5hiZ0Dd+fHmqLjZlxhtc305f1SE90XOdJVJtQNNw52J8dV7OXM7a6L1WVQbVoRnMcx66S0IQZ55E0AUMJDF7snhBhbmQeXLfh0KGVNaHmRkZG5qE1G06d2tcebmFsET318AuwOkYgCXTn96cbq+LWixaXuv9cO2HKnoe/QW7///8/A6ucQ1pGhtTp4vob8WtmeQozQDUwvL26+xHrt711Ezc+/cPIiOpVVtmQsmiZp/L2SdrCsGD9zqXkaij84R6maqDe349uvND3jASqBgIWiGGcnJwMDN8gbAYGj+p5YcpA/rerB3J614BFOUAKQAAllCBC////kVEBAS4uDogIMolFA7I0JhvmabDMnTt3ICqAxgMZb9++ff/+PZAhKCgoLAz2AQM8lCAKiSBJdhIAydGKSDrrYrQAAAAASUVORK5CYII="
+        alt=""> <span class="ml-10">结算单</span>
+    <span class="c-gray en">&gt;</span> 结算明细推广
+</nav>
+<div class="pd-20">
+    <div class="div_02">
+        <span class="blank_across_small" style="margin-left:14px;"></span>
+        结算单编号：
+        <span style="display: inline-block; width:150px;">{{model.settlementNo}}</span>
+        <span class="blank_across_small" style="margin-left:14px;"></span>
+        经纪公司：<span class="blank_across_10"></span>
+        <span style="display: inline-block; width:100px;">{{model.brokerCompanyName}}</span>
+        <span class="blank_across_small" style="margin-left:14px;"></span>
+        结算类型：<span class="blank_across_10"></span>
+        <span style="display: inline-block; width:100px;">{{model.billType | Classtrength}}</span>
+        <span class="blank_across_small" style="margin-left:14px;"></span>
+        结算状态<span class="blank_across_10"></span>
+        {{model.status | StatusStrength}}
+    </div>
+    <div id="table-sort_wrapper" class="dataTables_wrapper no-footer mt-20">
+        <table class="table table-border table-bordered table-hover table-bg" style="width: 100%;">
+            <thead>
+                <tr class="text-c" role="row">
+                    <th class="sorting_disabled" style="width: 50px;"></th>
+                    <th class="sorting_disabled" style="width: 120px;">经纪人</th>
+                    <th class="sorting_disabled" style="width: 200px;">客户名称</th>
+                    <th class="sorting_disabled" style="width: 120px;">激励类型</th>
+                    <th class="sorting_disabled" style="width: 120px;">激励日期</th>
+                    <th class="sorting_disabled" style="width: 120px;">客户类型</th>
+                    <th class="sorting_disabled" style="width: 120px;">含税佣金</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of detailLists;let i = index" role="row" class="odd text-c">
+                    <td>{{i+1}}</td>
+                    <td>{{item.brokerName}}</td>
+                    <td>{{item.custName}}</td>
+                    <td>{{item.incentiveType | IncentiveStrength}}</td>
+                    <td>{{item.incentiveTime | date:"yyyy-MM-dd"}}</td>
+                    <td>{{item.custType | CustStrength}}</td>
+                    <td>{{item.brokerageIncludeTax}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.hang {
+    display: inline-block;
+    overflow: hidden;
+    margin-top: 20px;
+}
+.mark {
+    display: inline-block;
+    width: 140px;
+    height: 31px;
+    line-height: 31px;
+    text-align: right;
+}
+.left div,
+.right div {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+}
+.note textarea {
+    padding: 6px;
+    line-height: 16px;
+    font-size: 14px;
+    resize: none;
+    width: 900px;
+    height: 60px;
+}
+[disabled]{
+    background: #ccc;
+}

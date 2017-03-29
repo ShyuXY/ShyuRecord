@@ -1,0 +1,145 @@
+<nav class="breadcrumb">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABWElEQVQoFWP8+vUrAymAiRTFILU4Nbx9/harWVg1PF9WER0aFhpXt/E5hiZ0Dd+fHmqLjZlxhtc305f1SE90XOdJVJtQNNw52J8dV7OXM7a6L1WVQbVoRnMcx66S0IQZ55E0AUMJDF7snhBhbmQeXLfh0KGVNaHmRkZG5qE1G06d2tcebmFsET318AuwOkYgCXTn96cbq+LWixaXuv9cO2HKnoe/QW7///8/A6ucQ1pGhtTp4vob8WtmeQozQDUwvL26+xHrt711Ezc+/cPIiOpVVtmQsmiZp/L2SdrCsGD9zqXkaij84R6maqDe349uvND3jASqBgIWiGGcnJwMDN8gbAYGj+p5YcpA/rerB3J614BFOUAKQAAllCBC////kVEBAS4uDogIMolFA7I0JhvmabDMnTt3ICqAxgMZb9++ff/+PZAhKCgoLAz2AQM8lCAKiSBJdhIAydGKSDrrYrQAAAAASUVORK5CYII=" alt=""> <span class="ml-10">客商维护</span>
+    <span class="c-gray en">&gt;</span> 供应商详情
+    <!--<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+        <i id="btn-refresh" class="Hui-iconfont">&#xe68f;</i>
+    </a>-->
+</nav>
+<form name="form" class="layout">
+    <h4>基本信息</h4>
+    <div class="hang">
+        <div>
+            <label class="mark" for="khname">供应商名称：</label>
+            <span class="inp">{{list.companyName}}</span>
+        </div>
+        <div>
+            <label class="mark" for="khjc">供应商简称：</label>
+            <span class="inp">{{list.shortName}}</span>
+        </div>  
+    </div>
+    <div class="hang">
+        <div>
+            <label class="mark" for="swdjh">税务登记号：</label>
+            <span class="inp">{{list.taxRegNo}}</span>
+        </div>
+        <div>
+            <label class="mark" for="faren">法人：</label>
+            <span class="inp">{{list.legalPerson}}</span>
+        </div>  
+    </div>
+    <div class="hang">
+        <div>
+            <label class="mark" for="companyMan">公司联系人：</label>
+            <span class="inp">{{list.linkman}}</span>
+        </div>
+        <div>
+            <label class="mark" for="phone">手机号码：</label>
+            <span class="inp">{{list.mobile}}</span>
+        </div>  
+    </div>
+    <div class="hang">
+        <div>
+            <label class="mark" for="email">邮箱：</label>
+            <span class="inp">{{list.email}}</span>
+        </div>
+        <div>
+            <label class="mark" for="address">地址：</label>
+            <span class="inp">{{list.address}}</span>
+        </div>  
+    </div>
+    <div class="hang">
+        <div>
+            <label class="mark" for="companyTell">公司联系电话：</label>
+            <span class="inp">{{list.phoneNumber}}</span>
+        </div>
+        <div>
+            <label class="mark" for="companyCz">公司传真：</label>
+            <span class="inp">{{list.faxNumber}}</span>
+        </div>  
+    </div>
+    <div class="hang">
+        <div style="width:530px;">
+            <span class="mark" for="companyTell">业务范围：</span>
+            <span class="provid">
+                <span>{{list.ngbcIsBuyStoreage}}</span>
+                <span>{{list.ngbcIsSellTransport}}</span>
+                <span>{{list.ngbcIsOperatorMachining}}</span>
+            </span>
+        </div>
+        <div>
+            <span class="mark" for="companyCz">状态：</span>
+            <span class="provid">{{list.isValid}}</span>
+        </div>  
+    </div>
+    <h4>辅助信息</h4>
+    <div class="hang">
+        <div>
+            <label class="mark" for="khh">开户行：</label>
+            <span class="inp">{{list.bankName}}</span>
+        </div>
+        <div>
+            <label class="mark" for="khzh">开户行账号：</label>
+            <span class="inp">{{list.bankNo}}</span>
+        </div>  
+    </div>
+    <div class="hang">
+        <div>
+            <label class="mark" for="khTime">开户时间：</label>
+            <span class="inp">{{list.bankNoCreatedate}}</span>
+        </div> 
+    </div>
+    <h4>这里文件区域</h4>
+    <div class="fileC">
+        <div class="up">
+            <div class="up-left">
+                <div>
+                    <a href="javascript:;" class="file">
+                        <input #input />营业执照注册号附件
+                    </a>
+                </div>
+                <div *ngFor="let file_src of file_srcs;" class="imgC">
+                    <img id="src" [attr.src]='file_src' alt="" />
+                </div>
+            </div>
+            <div class="up-right">
+                <div>
+                    <a href="javascript:;" class="file">
+                        <input #input1 />组织机构代码证附件
+                    </a>
+                </div>
+                <div *ngFor="let file_src of file_srcs1;" class="imgC">
+                    <img id="src1" [attr.src]='file_src' alt="" />
+                </div>
+            </div>
+        </div>
+        <div class="up">
+            <div class="up-left">
+                <div>
+                    <a href="javascript:;" class="file">
+                        <input #input2 />税务登记证附件
+                    </a>
+                </div>
+                <div *ngFor="let file_src of file_srcs2;" class="imgC">
+                    <img id="src" [attr.src]='file_src' alt="" />
+                </div>
+            </div>
+            <div class="up-right">
+                <div>
+                    <a href="javascript:;" class="file">
+                        <input #input3 />统一社会信用代码证附件
+                    </a>
+                </div>
+                <div *ngFor="let file_src of file_srcs3;" class="imgC">
+                    <img id="src1" [attr.src]='file_src' alt="这里上传文件" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hang">
+        <div style="overflow: hidden;" class="left note">
+            <div style="float: left;"><label for="khname">备注</label></div>：
+            <span style="float: right;margin-left: 4px;">{{list.memo}}</span>
+        </div>
+    </div>
+
+</form>

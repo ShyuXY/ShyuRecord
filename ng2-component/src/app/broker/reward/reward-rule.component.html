@@ -1,0 +1,107 @@
+<nav class="breadcrumb">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABWElEQVQoFWP8+vUrAymAiRTFILU4Nbx9/harWVg1PF9WER0aFhpXt/E5hiZ0Dd+fHmqLjZlxhtc305f1SE90XOdJVJtQNNw52J8dV7OXM7a6L1WVQbVoRnMcx66S0IQZ55E0AUMJDF7snhBhbmQeXLfh0KGVNaHmRkZG5qE1G06d2tcebmFsET318AuwOkYgCXTn96cbq+LWixaXuv9cO2HKnoe/QW7///8/A6ucQ1pGhtTp4vob8WtmeQozQDUwvL26+xHrt711Ezc+/cPIiOpVVtmQsmiZp/L2SdrCsGD9zqXkaij84R6maqDe349uvND3jASqBgIWiGGcnJwMDN8gbAYGj+p5YcpA/rerB3J614BFOUAKQAAllCBC////kVEBAS4uDogIMolFA7I0JhvmabDMnTt3ICqAxgMZb9++ff/+PZAhKCgoLAz2AQM8lCAKiSBJdhIAydGKSDrrYrQAAAAASUVORK5CYII="
+        alt=""> <span class="ml-10">激励规则</span>
+    <span class="c-gray en">&gt;</span> 激励规则列表
+    <!--<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+        <i id="btn-refresh" class="Hui-iconfont">&#xe68f;</i>
+    </a>-->
+</nav>
+<div class="pd-20">   
+     <h3 class="mt-20">经纪人激励管理</h3>
+    <div style="width: 90%;margin: 0 auto;margin-top:20px;">
+       <div style="width: 900px;margin: 0 auto;">
+            <span style="width: 80px;display: inline-block;text-align: right;">平台</span>
+             :
+            <select #ptId class="select input-text" style="width:160px;margin-left: 10px;" [(ngModel)]="model.ptId">
+            <option value="">请选择</option>
+            <option value="G00000">钢源城</option>
+            </select>
+            <span class="blank_across_small" style="margin-left:40px;"></span>
+            状态 :
+            <select #status class="select input-text" style="width:160px;margin-left: 10px;" [(ngModel)]="model.status">
+                <option value="">请选择</option>
+                <option value="00">无效</option>
+                <option value="10">待确认</option>
+                <option value="20">已确认</option>
+                <option value="99">归档</option>
+            </select>
+            <span class="blank_across_small" style="margin-left:40px;"></span>
+            确认人 :
+            <input #confirmUserName class="input-text" style="width:160px;margin-left: 10px;" [(ngModel)]="model.confirmUserName">
+       </div>
+       <div style="width: 900px;margin: 0 auto;margin-top: 20px;">
+           <span style="width: 80px;display: inline-block;text-align: right;">起始日期</span>
+             :
+            <div style="position: relative; top:13px; display: inline-block;margin-left: 10px;margin-right: 10px;">
+            <my-date-picker [options]="myDatePickerOptions"
+                (dateChanged)="onDateChanged1($event)"></my-date-picker>
+            </div>
+            --
+           <div style="position: relative; top:13px; display: inline-block;margin-left: 10px;">
+            <my-date-picker [options]="myDatePickerOptions"
+                (dateChanged)="onDateChanged2($event)"></my-date-picker>
+           </div>
+            <span class="blank_across_small" style="margin-left:14px;"></span>
+            <button class="btn btn-success" name="" style="width:100px;height:35px;margin-left: 144px;" (click)="search('1')">查询</button>
+       </div>
+    </div>
+    <div>
+        <div style="width: 900px;text-align: center;margin: 0 auto;margin-top: 20px;">
+            <button class="btn btn-success" name="" style="width:100px;height:35px;" routerLink="/master-information">新增</button>
+            <button class="btn btn-success" name="" style="width:100px;height:35px;margin-left: 40px;" (click)="cancel()">撤销</button>
+            <button class="btn btn-success" name="" style="width:100px;height:35px;margin-left: 40px;" (click)="archive()">归档</button>
+        </div>
+        
+            <h3 class="mt-20">规则列表</h3>
+            <div id="table-sort_wrapper" class="dataTables_wrapper no-footer mt-20">
+                <table class="table table-border table-bordered table-hover table-bg" style="width: 100%;">
+                    <thead>
+                        <tr class="text-c" role="row">
+                            <th class="sorting_disabled" style="width: 60px;"></th>
+                            <th class="sorting_disabled" style="width: 200px;">激励模型编号</th>
+                            <th class="sorting_disabled" style="width: 120px;">状态</th>
+                            <th class="sorting_disabled" style="width: 200px;">平台</th>
+                            <th class="sorting_disabled" style="width: 120px;">激励模型描述</th>
+                            <th class="sorting_disabled" style="width: 200px;">激励起始时间</th>
+                            <th class="sorting_disabled" style="width: 150px;">激励结束时间</th>
+                            <th class="sorting_disabled" style="width: 120px;">创建人</th>
+                            <th class="sorting_disabled" style="width: 120px;">确认人</th>
+                            <th class="sorting_disabled" style="width: 120px;">备注</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="rewardItems">
+                        <tr [hidden]="rewardItem.deleteFlag !== 0" role="row" class="odd text-c" *ngFor="let rewardItem of rewardItems,let i = index">
+                            <td><input type="radio" value={{i}} name="ssss"></td>
+                            <td [routerLink]="['/master-information', rewardItem.incentiveNo]"><a style="color: deepskyblue;">{{rewardItem.incentiveNo}}</a></td>
+                            <td>{{rewardItem.status | status}}</td>
+                            <td>{{rewardItem.ptName}}</td>
+                            <td>{{rewardItem.ruleDesc}}</td>
+                            <td>{{rewardItem.ruleStartTime | date:"yyyy-MM-dd"}}</td>
+                            <td>{{rewardItem.ruleEndTime | date:"yyyy-MM-dd"}}</td>
+                            <td>{{rewardItem.createUserName}}</td>
+                            <td>{{rewardItem.confirmUserName}}</td>
+                            <td>{{rewardItem.remark}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div [hidden]="tabShow" class="dataTables_paginate paging_full_numbers" id="table-sort_paginate">
+                    <a (click)="btnClick(1);" class="paginate_button first disabled" aria-controls="table-sort" data-dt-idx="0" tabindex="0" id="table-sort_first">第一页</a>
+                    <a (click)="btnClick(cur-1);" class="paginate_button previous disabled" aria-controls="table-sort" data-dt-idx="1" tabindex="0" id="table-sort_previous">上一页</a>
+                    <a [hidden]="!prevShow" (click)="firstPage(cur)" class="paginate_button_spec" aria-controls="table-sort" data-dt-idx="2" tabindex="0">1</a>
+                    <span [hidden]="!prevShow">...</span>
+                    <span *ngFor="let item of items">
+                        <a (click)="btnClick(item);" [ngClass]="setClasses(item)" aria-controls="table-sort" data-dt-idx="2" tabindex="0">{{item}}</a>
+                    </span>
+                    <span [hidden]="!nextShow">...</span>
+                    <a [hidden]="!nextShow" (click)="lastPage(cur)" class="paginate_button_spec" aria-controls="table-sort" data-dt-idx="2" tabindex="0">{{pages}}</a>
+                    <a (click)="btnClick(cur+1);" class="paginate_button next" aria-controls="table-sort" data-dt-idx="7" tabindex="0" id="table-sort_next">下一页</a>
+                    <a (click)="btnClick(pages);" class="paginate_button last" aria-controls="table-sort" data-dt-idx="8" tabindex="0" id="table-sort_last">最后一页</a>
+                </div>
+            </div>
+        </div> 
+        <!--<div class="diolog">
+            <div class="titleDiolog">
+                
+            </div>
+        </div>-->
+</div>

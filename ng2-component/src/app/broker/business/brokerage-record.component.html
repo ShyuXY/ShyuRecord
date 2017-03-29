@@ -1,0 +1,116 @@
+<nav class="breadcrumb">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABWElEQVQoFWP8+vUrAymAiRTFILU4Nbx9/harWVg1PF9WER0aFhpXt/E5hiZ0Dd+fHmqLjZlxhtc305f1SE90XOdJVJtQNNw52J8dV7OXM7a6L1WVQbVoRnMcx66S0IQZ55E0AUMJDF7snhBhbmQeXLfh0KGVNaHmRkZG5qE1G06d2tcebmFsET318AuwOkYgCXTn96cbq+LWixaXuv9cO2HKnoe/QW7///8/A6ucQ1pGhtTp4vob8WtmeQozQDUwvL26+xHrt711Ezc+/cPIiOpVVtmQsmiZp/L2SdrCsGD9zqXkaij84R6maqDe349uvND3jASqBgIWiGGcnJwMDN8gbAYGj+p5YcpA/rerB3J614BFOUAKQAAllCBC////kVEBAS4uDogIMolFA7I0JhvmabDMnTt3ICqAxgMZb9++ff/+PZAhKCgoLAz2AQM8lCAKiSBJdhIAydGKSDrrYrQAAAAASUVORK5CYII="
+        alt=""> <span class="ml-10">经纪人</span>
+    <span class="c-gray en">&gt;</span> 佣金记录
+    <!--<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+        <i id="btn-refresh" class="Hui-iconfont">&#xe68f;</i>
+    </a>-->
+</nav>
+<div class="layout">   
+    <div>
+       <div style="width: 960px;margin: 0 auto;">
+           <span class="mark">经纪公司</span> :
+            <input #brokerComName class="input-text" style="width:170px;margin-left: 5px;" [(ngModel)]="model.brokerCompanyName">
+            <span class="mark">经纪人</span> :
+            <input #brokerName class="input-text" style="width:170px;margin-left: 5px;" [(ngModel)]="model.brokerName">
+            <span class="mark">客户名称</span> :
+            <input #custName class="input-text" style="width:170px;margin-left: 5px;" [(ngModel)]="model.custName">
+       </div>
+       <div style="width: 960px;margin: 0 auto;margin-top: 15px;">
+            <span class="mark">客户类型</span> :
+            <select #orderType class="select input-text" style="width:170px;margin-left: 5px;" [(ngModel)]="model.custType">
+                <option value="">请选择</option>
+                <option value="10">终端用户</option>
+                <option value="20">钢厂</option>
+                <option value="30">资源提供方</option>
+                <option value="40">仓库</option>
+                <option value="50">承运商</option>
+                <option value="60">车辆</option>
+                <option value="70">非终端用户</option>
+            </select>
+            <span class="mark">业务类型</span> :
+            <select #orderType class="select input-text" style="width:170px;margin-left: 5px;" [(ngModel)]="model.incentiveType">
+                <option value="">请选择</option>
+                <option value="月度佣金">月度佣金</option>
+                <option value="客户开拓">客户开拓</option>
+                <option value="业务开展">业务开展</option>
+            </select>
+            <span class="mark">业务单据号</span> :
+            <input #brokerName class="input-text" style="width:170px;margin-left: 5px;" [(ngModel)]="model.orderNo">
+       </div>
+       <div style="width: 960px;margin: 0 auto;margin-top: 5px;">
+            <span class="mark">激励日期</span> :
+            <div style="position: relative; top:13px; display: inline-block;margin-left: 5px;">
+            <my-date-picker [options]="myDatePickerOptions"
+                (dateChanged)="onDateChanged1($event)"></my-date-picker>
+            </div>
+            --
+           <div style="position: relative; top:13px; display: inline-block;">
+            <my-date-picker [options]="myDatePickerOptions"
+                (dateChanged)="onDateChanged2($event)"></my-date-picker>
+           </div>
+
+           <span class="mark" style="width: 107px;">支付状态</span> :
+            <select #scopeCode class="select input-text" style="width:150px;margin-left: 5px;" [(ngModel)]="model.commissionStatus">
+                <option value="">请选择</option>
+                <option value="10">未出账</option>
+                <option value="20">已出账</option>
+                <option value="30">已支付</option>
+            </select>
+            <button class="btn btn-success" name="" style="width:100px;height:35px;margin-left: 40px;" (click)="search('1','10')">查询</button>
+       </div>
+    </div>
+    <div>
+            <div id="table-sort_wrapper" class="dataTables_wrapper no-footer mt-20">
+                <table class="table table-border table-bordered table-hover table-bg" style="width: 100%;">
+                    <thead>
+                        <tr class="text-c" role="row">
+                            <th class="sorting_disabled" style="width: 100px;">经纪人</th>
+                            <th class="sorting_disabled" style="width: 200px;">经纪公司</th>
+                            <th class="sorting_disabled" style="width: 200px;">客户名称</th>
+                            <th class="sorting_disabled" style="width: 120px;">客户类型</th>
+                            <th class="sorting_disabled" style="width: 120px;">业务类型</th>
+                            <th class="sorting_disabled" style="width: 140px;">激励日期</th>
+                            <th class="sorting_disabled" style="width: 120px;">未出账金额</th>
+                            <th class="sorting_disabled" style="width: 120px;">已出账金额</th>
+                            <th class="sorting_disabled" style="width: 150px;">业务单据号</th>
+                            <th class="sorting_disabled" style="width: 120px;">支付状态</th>
+                            <th class="sorting_disabled" style="width: 150px;">备注</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="recordLists">
+                        <tr role="row" class="odd text-c" *ngFor="let recordList of recordLists">
+                            <td>{{recordList.brokerName}}</td>
+                            <td>{{recordList.brokerCompanyName}}</td>
+                            <td>{{recordList.custName}}</td>
+                            <td>{{recordList.custType | custType}}</td>
+                            <td>{{recordList.incentiveType}}</td>
+                            <td>{{recordList.incentiveDate | date:"yyyy-MM-dd"}}</td>
+                            <td>{{recordList.noOutCommission}}</td>
+                            <td>{{recordList.outCommission}}</td>
+                            <td>{{recordList.orderNo}}</td>
+                            <td>{{recordList.commissionStatus | commissionStatus}}</td>
+                            <td>{{recordList.businessRemark}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 20px;">
+                    查询结果 <span style="color: red;">{{totalCount}}</span> 条。
+                     当前第<span style="color: red;"> {{cur}} </span>页，共<span style="color: red;"> {{pages}} </span>页
+                </div>
+                <div [hidden]="tabShow" class="dataTables_paginate paging_full_numbers" id="table-sort_paginate">
+                    <a (click)="btnClick(1);" class="paginate_button first disabled" aria-controls="table-sort" data-dt-idx="0" tabindex="0" id="table-sort_first">第一页</a>
+                    <a (click)="btnClick(cur-1);" class="paginate_button previous disabled" aria-controls="table-sort" data-dt-idx="1" tabindex="0" id="table-sort_previous">上一页</a>
+                    <a [hidden]="!prevShow" (click)="firstPage(cur)" class="paginate_button_spec" aria-controls="table-sort" data-dt-idx="2" tabindex="0">1</a>
+                    <span [hidden]="!prevShow">...</span>
+                    <span *ngFor="let item of items">
+                        <a (click)="btnClick(item);" [ngClass]="setClasses(item)" aria-controls="table-sort" data-dt-idx="2" tabindex="0">{{item}}</a>
+                    </span>
+                    <span [hidden]="!nextShow">...</span>
+                    <a [hidden]="!nextShow" (click)="lastPage(cur)" class="paginate_button_spec" aria-controls="table-sort" data-dt-idx="2" tabindex="0">{{pages}}</a>
+                    <a (click)="btnClick(cur+1);" class="paginate_button next" aria-controls="table-sort" data-dt-idx="7" tabindex="0" id="table-sort_next">下一页</a>
+                    <a (click)="btnClick(pages);" class="paginate_button last" aria-controls="table-sort" data-dt-idx="8" tabindex="0" id="table-sort_last">最后一页</a>
+                </div>
+            </div>
+        </div> 
+</div>

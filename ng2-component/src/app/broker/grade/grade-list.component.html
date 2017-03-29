@@ -1,0 +1,112 @@
+<nav class="breadcrumb">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABWElEQVQoFWP8+vUrAymAiRTFILU4Nbx9/harWVg1PF9WER0aFhpXt/E5hiZ0Dd+fHmqLjZlxhtc305f1SE90XOdJVJtQNNw52J8dV7OXM7a6L1WVQbVoRnMcx66S0IQZ55E0AUMJDF7snhBhbmQeXLfh0KGVNaHmRkZG5qE1G06d2tcebmFsET318AuwOkYgCXTn96cbq+LWixaXuv9cO2HKnoe/QW7///8/A6ucQ1pGhtTp4vob8WtmeQozQDUwvL26+xHrt711Ezc+/cPIiOpVVtmQsmiZp/L2SdrCsGD9zqXkaij84R6maqDe349uvND3jASqBgIWiGGcnJwMDN8gbAYGj+p5YcpA/rerB3J614BFOUAKQAAllCBC////kVEBAS4uDogIMolFA7I0JhvmabDMnTt3ICqAxgMZb9++ff/+PZAhKCgoLAz2AQM8lCAKiSBJdhIAydGKSDrrYrQAAAAASUVORK5CYII=" alt=""> <span class="ml-10">业务规则</span>
+    <span class="c-gray en">&gt;</span> 业务等级规则
+    <!--<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+        <i id="btn-refresh" class="Hui-iconfont">&#xe68f;</i>
+    </a>-->
+</nav>
+
+<div class="pd-20">
+        <div class="div_02">
+            <div>
+                平台 :<span class="blank_across_10"></span>
+                <select #pt_id class="select input-text" style="width:180px;" [(ngModel)]="gradeQueryParams.pt_id">
+                  <option value="G00000">钢源城</option>
+				</select>
+                <span class="blank_across_small"></span>
+                状态 :<span class="blank_across_10"></span>
+                <select #status class="select input-text" style="width:180px;" [(ngModel)]="gradeQueryParams.status">
+                  <option value="">请选择</option>
+                  <option value="01">有效</option>
+                  <option value="02">无效</option>
+				</select>
+                <span class="blank_across_small"></span>
+                用户类型 :<span class="blank_across_10"></span>
+                <select #userType class="select input-text" style="width:180px;" [(ngModel)]="gradeQueryParams.userType">
+                  <option value="">请选择</option>                  
+                  <option value="01">经纪人</option>
+                  <option value="02">买方</option>
+                  <option value="03">卖方</option>
+				</select>
+                <span class="blank_across_small"></span>
+                <span class="blank_across_small"></span>
+                <button class="btn btn-success" id="search" name="" style="width:100px;height:35px;" (click)="search();">查询</button>
+                    <span class="blank_across_10"></span>
+                <button class="btn btn-success" name="" style="width:100px;height:35px;" routerLink="/grade-detail">新增</button> 
+                    <span class="blank_across_10"></span>
+                <button class="btn btn-success" name="" style="width:100px;height:35px;" (click)="cancel()">撤销</button> 
+            </div> 
+        </div>
+    
+        <div class="mt-20">
+            <div id="table-sort_wrapper" class="dataTables_wrapper no-footer">
+                <table class="table table-border table-bordered table-hover table-bg" style="width: 100%;">
+                    <thead>
+                        <tr class="text-c" role="row">
+                            <th class="sorting_disabled" style="width: 30px;"></th>
+                            <th class="sorting_disabled" style="width: 270px;">等级管理号</th>
+                            <th class="sorting_disabled" style="width: 120px;">平台</th>
+                            <th class="sorting_disabled" style="width: 150px;">用户类型</th>
+                            <th class="sorting_disabled" style="width: 120px;">状态</th>
+                            <th class="sorting_disabled" style="width: 200px;">用户等级</th>
+                            <th class="sorting_disabled" style="width: 150px;">等级描述</th>
+                            <th class="sorting_disabled" style="width: 120px;">等级值</th>
+                            <th class="sorting_disabled" style="width: 120px;">备注</th>
+                            <th class="sorting_disabled" style="width: 110px;">辅助1</th>
+                            <th class="sorting_disabled" style="width: 100px;">辅助1描述</th>
+                            <th class="sorting_disabled" style="width: 110px;">辅助2</th>
+                            <th class="sorting_disabled" style="width: 100px;">辅助2描述</th>
+                            <th class="sorting_disabled" style="width: 110px;">辅助3</th>
+                            <th class="sorting_disabled" style="width: 100px;">辅助3描述</th>
+                            <th class="sorting_disabled" style="width: 110px;">辅助4</th>
+                            <th class="sorting_disabled" style="width: 100px;">辅助4描述</th>
+                            <th class="sorting_disabled" style="width: 110px;">辅助5</th>
+                            <th class="sorting_disabled" style="width: 100px;">辅助5描述
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="grades">
+                        <tr role="row" class="odd text-c" *ngFor="let grade of grades">
+                            <td><input type="radio" name="check" value={{grade.id}} [(ngModel)]="userId" [disabled]="grade.status!=='01'"></td>
+                            <td>
+                                <a [routerLink]="['/grade-detail', grade.id]" [hidden]="grade.status!=='01'">{{grade.gradeNo}}</a>
+                                <a style="color: #ccc; cursor:default;" [hidden]="grade.status=='01'">{{grade.gradeNo}}</a>
+                            </td>
+                            <td>{{grade.ptId | ptIdStrength}}</td>
+                            <td>{{grade.userType | userTypeStrength}}</td>
+                            <td>{{grade.status | statusStrength}}</td>
+                            <td>{{grade.userGrade | userGradeStrength}}</td>
+                            <td>{{grade.gradeDescribe}}</td>
+                            <td>{{grade.gradeVal}}</td>
+                            <td>{{grade.remark}}</td>
+                            <td>{{grade.ext1}}</td>
+                            <td>{{grade.ext1Desc}}</td>
+                            <td>{{grade.ext2}}</td>
+                            <td>{{grade.ext2Desc}}</td>
+                            <td>{{grade.ext3}}</td>
+                            <td>{{grade.ext3Desc}}</td>
+                            <td>{{grade.ext4}}</td>
+                            <td>{{grade.ext4Desc}}</td>
+                            <td>{{grade.ext5}}</td>
+                            <td>{{grade.ext5Desc}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!--<div class="dataTables_info" id="table-sort_info" role="status" aria-live="polite">显示 {{initNum}} 到 {{pages}} ，共 {{totalCount}} 条</div>
+                <div [hidden]="tabShow" class="dataTables_paginate paging_full_numbers" id="table-sort_paginate">
+                    <a (click)="btnClick(1);" class="paginate_button first disabled" aria-controls="table-sort" data-dt-idx="0" tabindex="0" id="table-sort_first">第一页</a>
+                    <a (click)="btnClick(cur-1);" class="paginate_button previous disabled" aria-controls="table-sort" data-dt-idx="1" tabindex="0" id="table-sort_previous">上一页</a>
+                    <a [hidden]="!prevShow" (click)="firstPage(cur)" class="paginate_button_spec" aria-controls="table-sort" data-dt-idx="2" tabindex="0">1</a>
+                    <span [hidden]="!prevShow">...</span>
+                    <span *ngFor="let item of items">
+                        <a (click)="btnClick(item);" [ngClass]="setClasses(item)" aria-controls="table-sort" data-dt-idx="2" tabindex="0">{{item}}</a>
+                    </span>
+                    <span [hidden]="!nextShow">...</span>
+                    <a [hidden]="!nextShow" (click)="lastPage(cur)" class="paginate_button_spec" aria-controls="table-sort" data-dt-idx="2" tabindex="0">{{pages}}</a>
+                    <a (click)="btnClick(cur+1);" class="paginate_button next" aria-controls="table-sort" data-dt-idx="7" tabindex="0" id="table-sort_next">下一页</a>
+                    <a (click)="btnClick(pages);" class="paginate_button last" aria-controls="table-sort" data-dt-idx="8" tabindex="0" id="table-sort_last">最后一页</a>
+                </div>-->
+            </div>
+        </div>
+    </div>

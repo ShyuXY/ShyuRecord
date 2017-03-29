@@ -1,0 +1,170 @@
+<nav class="breadcrumb">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABWElEQVQoFWP8+vUrAymAiRTFILU4Nbx9/harWVg1PF9WER0aFhpXt/E5hiZ0Dd+fHmqLjZlxhtc305f1SE90XOdJVJtQNNw52J8dV7OXM7a6L1WVQbVoRnMcx66S0IQZ55E0AUMJDF7snhBhbmQeXLfh0KGVNaHmRkZG5qE1G06d2tcebmFsET318AuwOkYgCXTn96cbq+LWixaXuv9cO2HKnoe/QW7///8/A6ucQ1pGhtTp4vob8WtmeQozQDUwvL26+xHrt711Ezc+/cPIiOpVVtmQsmiZp/L2SdrCsGD9zqXkaij84R6maqDe349uvND3jASqBgIWiGGcnJwMDN8gbAYGj+p5YcpA/rerB3J614BFOUAKQAAllCBC////kVEBAS4uDogIMolFA7I0JhvmabDMnTt3ICqAxgMZb9++ff/+PZAhKCgoLAz2AQM8lCAKiSBJdhIAydGKSDrrYrQAAAAASUVORK5CYII="
+        alt=""> <span class="ml-10">推广规则</span>
+    <span class="c-gray en">&gt;</span> 推广信息详情
+</nav>
+<div class="pd-20">
+    <div class="div_02">
+        <div>
+            <span class="mark">规则编号</span><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+            <input disabled [(ngModel)]="addPromoteItem.extensionNo" class="input-text" style="width:175px;">
+<span class="mark">平台</span><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+<select disabled [(ngModel)]="addPromoteItem.ptId" class="select input-text" style="width:175px;">
+<option value="G00000">钢源城</option>
+<!--<option value="0000">大智运</option>-->
+</select>
+<span class="blank_across_small"></span>
+<span class="mark">状态</span><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+<select disabled [(ngModel)]="addPromoteItem.status" class="select input-text" style="width:175px;">
+<option value=""></option>
+<option value="00">无效</option>
+<option value="10">待确认</option>
+<option value="20">已确认</option>
+<option value="99">归档</option>
+</select>
+</div>
+
+<div class="hang">
+    <div style="overflow: hidden;" class="left note">
+<div style="float: left;">规则描述</div><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+<textarea [disabled]="addPromoteItem.status=='00'||addPromoteItem.status=='99'" [(ngModel)]="addPromoteItem.description" style="float: right;margin-left: 4px;" class="input-text" id="" cols="30" rows="10"></textarea>
+</div>
+</div>
+
+<div style="margin-top:20px">
+<span class="mark">规则有效期</span><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+<div style="position: relative; top:13px; display: inline-block;">
+<my-date-picker [(ngModel)]="date1" [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)"></my-date-picker>
+</div> 一 <div style="position: relative; top:13px; display: inline-block;">
+<my-date-picker [(ngModel)]="date2" [options]="myDatePickerOptions" (dateChanged)="onDateChanged1($event)"></my-date-picker>
+</div>
+
+<span class="mark" style="width: 295px">确认人</span><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+<input [(ngModel)]="addPromoteItem.confirmUser" disabled class="input-text" style="width:185px;">
+</div>
+
+<div style="margin-top:20px">
+<span class="mark">创建人</span><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+<input [(ngModel)]="addPromoteItem.creator" disabled class="input-text" style="width:185px;">
+
+<span class="mark" style="width: 497px">创建时间</span><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+<input [(ngModel)]="addPromoteItem.createDate" disabled class="input-text" style="width:185px;">
+</div>
+
+<div class="hang">
+    <div style="overflow: hidden;" class="left note">
+<div style="float: left;">备注</div><span class="blank_across_10"></span>:<span class="blank_across_10"></span>
+<textarea [disabled]="addPromoteItem.status=='00'||addPromoteItem.status=='99'" [(ngModel)]="addPromoteItem.remarks" style="float: right;margin-left: 4px;" class="input-text" id="" cols="30" rows="10"></textarea>
+</div>
+</div>
+<div style="text-align: center;margin-top: 20px;">
+<button [disabled]="addPromoteItem.status !== '10'" (click)="newList()" class="btn btn-success" style="width:100px;height:35px;">新增明细</button>
+<button [disabled]="addPromoteItem.status !== '10'" (click)="delList()" class="btn btn-success" style="width:100px;height:35px;margin-left: 45px">删除明细</button>
+<button [disabled]="addPromoteItem.status !== '10'" (click)="copyList()" class="btn btn-success" style="width:100px;height:35px;margin-left: 45px">复制明细</button>
+<button [disabled]="addPromoteItem.status !== '10'" (click)="onConfirm()" class="btn btn-success" style="width:100px;height:35px;margin-left: 45px">确认</button>
+<button [disabled]="addPromoteItem.status !== '20'" (click)="disonConfirm()" class="btn btn-success" style="width:100px;height:35px;margin-left: 45px">取消确认</button>
+<button [disabled]="addPromoteItem.status !== '10'" (click)="onSubmit()" class="btn btn-success" style="width:100px;height:35px;margin-left: 45px">保存</button>
+<button routerLink="/promote-rule" class="btn btn-success" style="width:100px;height:35px;margin-left: 45px">返回</button>
+</div>
+</div>
+<span class="blank_vertical"></span>
+<div class="mt-20" style="margin-top: 20px;">
+<div id="table-sort_wrapper" class="dataTables_wrapper no-footer">
+    <table class="table table-border table-bordered table-hover table-bg" style="width: 100%;">
+<thead>
+    <tr class="text-c" role="row">
+        <th style="width: 10px;"></th>
+<th style="width: 80px;">用户类型</th>
+<th style="width: 70px;">推广类型</th>
+<th style="width: 50px;">结算周期</th>
+<th style="width: 50px;">值类型</th>
+<th style="width: 30px;">值</th>
+<th style="width: 60px;">终端类型</th>
+<th style="width: 30px;">备注</th>
+<th style="width: 30px;">辅助1</th>
+<th style="width: 30px;">辅助1描述</th>
+<th style="width: 30px;">辅助2</th>
+<th style="width: 30px;">辅助2描述</th>
+<th style="width: 30px;">辅助3</th>
+<th style="width: 30px;">辅助3描述</th>
+<th style="width: 30px;">辅助4</th>
+<th style="width: 30px;">辅助4描述</th>
+<th style="width: 30px;">辅助5</th>
+<th style="width: 30px;">辅助5描述</th>
+</tr>
+</thead>
+<tbody>
+    <tr *ngFor="let item of addPromoteItem.list;let i=index" role="row" class="odd text-c">
+        <td><input name="dx" value={{i}}  type="checkbox"></td>
+        <td>
+            <select [(ngModel)]="item.userType" class="select" style="width:90%;">
+<option value="10">终端用户</option>
+<option value="20">钢厂</option>
+<option value="30">资源提供方</option>
+<option value="40">仓库</option>
+<option value="50">承运商</option>
+<option value="60">车辆</option>
+<option value="70">非终端用户</option>
+</select>
+</td>
+<td>
+    <select [(ngModel)]="item.extensionType" class="select" style="width:90%;">
+<option value="10">注册</option>
+<option value="20">开展业务</option>
+<option value="30">推荐</option>
+</select>
+</td>
+<td>
+    <select [(ngModel)]="item.settlementCycle" class="select" style="width:90%;">
+<option value="10">及时</option>
+<option value="20">按天</option>
+<option value="30">按周</option>
+<option value="40">按月</option>
+<option value="50">按年</option>
+</select>
+</td>
+<td>
+    <select [(ngModel)]="item.valueType" class="select" style="width:90%;">
+<option value="10">固定值</option>
+<option value="20">百分比</option>
+</select>
+</td>
+<td>
+    <input type="number"  [(ngModel)]="item.valueData" class="input-text" style="width:100%;">
+</td>
+<td>
+    <select [(ngModel)]="item.terminalType" class="select" style="width:90%;">
+<option value="10">PC端</option>
+<option value="20">移动端</option>
+</select>
+</td>
+<td>
+    <input [(ngModel)]="item.remark" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext1" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext1Description" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext2" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext2Description" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext3" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext3Description" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext4" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext4Description" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext5" class="input-text" style="width:100%;"></td>
+<td>
+    <input [(ngModel)]="item.ext5Description" class="input-text" style="width:100%;"></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
